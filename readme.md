@@ -2,6 +2,8 @@
 
 An AI- and ML-powered trivia learning system. Where most quiz archives use string search, this app is built on semantic search. Furthermore, it uses Claude to synthesis the query results and provide additional context.
 
+Try it out here: https://quiz-rag.streamlit.app/
+
 ## Features
 
 - **Semantic Search**: Find relevant trivia questions using natural language queries
