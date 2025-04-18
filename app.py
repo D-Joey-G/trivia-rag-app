@@ -55,8 +55,12 @@ class TriviaKnowledgeSystem:
         
         for i, item in enumerate(self.trivia_data):
             # Combine relevant fields for embedding
-            text = f"{item.get('Question', '')} {item.get('Answer', '')} {item.get('Category', '')}"
-            texts.append(text)
+            formatted_item = '\n'.join([
+                f"Question: {item.get('Question', 'N/A')}",
+                f"Answer: {item.get('Answer', 'N/A')}",
+                f"Category: {item.get('Category', 'N/A')}"
+            ])
+            texts.append(formatted_item)
             
             # Store the mapping from index to original data
             id_to_data[i] = item
@@ -109,11 +113,11 @@ class TriviaKnowledgeSystem:
         formatted_items = []
         context_facts = []
         for item in related_items:
-            formatted_item = (
-                f"Question: {item.get('Question', 'N/A')}\n"
-                f"Answer: {item.get('Answer', 'N/A')}\n"
+            formatted_item = '\n'.join([
+                f"Question: {item.get('Question', 'N/A')}",
+                f"Answer: {item.get('Answer', 'N/A')}",
                 f"Category: {item.get('Category', 'N/A')}"
-            )
+            ])
             formatted_items.append(formatted_item)
             context_facts.append(f"- {item.get('Question', 'N/A')} {item.get('Answer', 'N/A')}")
         
@@ -160,7 +164,7 @@ class TriviaKnowledgeSystem:
                 prompt = f"""
                 Based on the following trivia questions and answers about "{query}":
                 
-                {"\n\n".join(formatted_items)}
+                {"".join(formatted_items)}
                 
                 Create a coherent, informative synthesis that organises this information 
                 into an educational overview. Include all key facts while creating natural 
