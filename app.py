@@ -9,7 +9,6 @@ from anthropic import Anthropic
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-import httpx
 
 # Verify secrets exist
 _ = st.secrets["anthropic"]
@@ -21,9 +20,7 @@ EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # Lightweight but effective model
 DATA_PATH = "trivia_data.json"
 
 # Initialise Anthropic
-# Explicitly create an httpx client
-http_client = httpx.Client(proxies=None) # Explicitly disable proxies if not needed, or configure as necessary
-anthropic = Anthropic(api_key=ANTHROPIC_API_KEY, http_client=http_client)
+anthropic = Anthropic(api_key=ANTHROPIC_API_KEY)
 
 class TriviaKnowledgeSystem:
     def __init__(self, data_source: Union[str, List[Dict[str, Any]]]):
